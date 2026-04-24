@@ -1,0 +1,1340 @@
+---
+// MTO Enterprise Pitch — Stakater Multi-Tenant Operator
+// Audience: Platform leads, CTOs, infrastructure architects
+// Theme: matches SCO Hyperscaler Engine design system
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stakater MTO — Enterprise Kubernetes Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --primary: #EA7845;
+      --primary-light: #FDF3EE;
+      --primary-mid: #F5C4A8;
+      --dark: #111827;
+      --gray: #6B7280;
+      --light-gray: #E5E7EB;
+      --bg: #FFFFFF;
+      --bg-light: #F9FAFB;
+      --red-hat: #E00000;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+
+    /* ── Slide container ── */
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    section {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      padding: 60px 80px;
+    }
+
+    section.active {
+      display: flex;
+    }
+
+    section.section-light {
+      background: var(--bg-light);
+    }
+
+    section.cta {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: white;
+    }
+
+    section.cta h1, section.cta h2, section.cta p { color: white; }
+    section.cta .highlight { color: var(--primary); }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    /* ── Typography ── */
+    h1 {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--dark);
+      letter-spacing: -1px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--dark);
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--gray);
+      max-width: 720px;
+    }
+
+    em { font-style: italic; color: var(--gray); }
+
+    .highlight {
+      color: var(--primary);
+    }
+
+    /* ── Logo ── */
+    .logo {
+      position: fixed;
+      top: 24px;
+      left: 32px;
+      z-index: 100;
+      opacity: 0.85;
+    }
+
+    .logo img { height: 32px; width: auto; }
+
+    /* ── Slide counter ── */
+    .slide-counter {
+      position: fixed;
+      bottom: 20px;
+      right: 32px;
+      font-size: 13px;
+      color: #9CA3AF;
+      z-index: 100;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Nav dots ── */
+    .nav-dots {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #D1D5DB;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .nav-dot.active {
+      background: var(--primary);
+      transform: scale(1.3);
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 14px;
+      padding: 28px 32px;
+    }
+
+    .card.accented {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* ── Pill tags ── */
+    .pill {
+      display: inline-block;
+      background: var(--bg-light);
+      border: 1px solid var(--light-gray);
+      border-radius: 100px;
+      padding: 5px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .pill.primary {
+      background: var(--primary-light);
+      border-color: var(--primary-mid);
+      color: var(--primary);
+    }
+
+    /* ── Two-column grid ── */
+    .col-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .col-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 36px;
+    }
+
+    /* ── Divider line ── */
+    .vdivider {
+      border-left: 3px solid var(--primary);
+      padding-left: 32px;
+    }
+
+    /* ── Flow arrow ── */
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--light-gray);
+      font-size: 32px;
+      font-weight: 300;
+    }
+
+    /* ── Stat callout ── */
+    .stat {
+      text-align: center;
+    }
+    .stat .number {
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .stat .label {
+      font-size: 15px;
+      color: var(--gray);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* ── Cluster diagram ── */
+    .cluster-chaos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .cluster-box {
+      border: 2px solid var(--light-gray);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray);
+      text-align: center;
+      min-width: 90px;
+    }
+
+    .cluster-box.stressed {
+      border-color: #FCA5A5;
+      background: #FEF2F2;
+      color: #DC2626;
+    }
+
+    /* ── Tenant model diagram ── */
+    .tenant-model {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .tenant-cluster {
+      width: 100%;
+      border: 2.5px solid var(--primary);
+      border-radius: 14px;
+      padding: 20px 28px;
+      background: var(--primary-light);
+    }
+
+    .tenant-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .tenant-tag {
+      flex: 1;
+      background: white;
+      border: 1.5px solid var(--primary-mid);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    /* ── Pillar cards ── */
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 12px;
+      padding: 22px 24px;
+      position: relative;
+    }
+
+    .pillar-card.featured {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .pillar-icon {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .pillar-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .pillar-tagline {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .pillar-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Before/After table ── */
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .comparison th {
+      padding: 16px 24px;
+      font-size: 16px;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    .comparison th.before {
+      background: #FEF2F2;
+      color: #DC2626;
+      width: 50%;
+    }
+
+    .comparison th.after {
+      background: var(--primary-light);
+      color: var(--primary);
+      width: 50%;
+    }
+
+    .comparison td {
+      padding: 13px 24px;
+      font-size: 16px;
+      color: var(--dark);
+      border-top: 1px solid var(--light-gray);
+      vertical-align: top;
+    }
+
+    .comparison td.before {
+      background: #FFFBFB;
+      color: #6B7280;
+    }
+
+    .comparison td.after {
+      background: #FDFAF8;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    /* ── Adoption steps ── */
+    .steps {
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .step {
+      flex: 1;
+      padding: 28px 24px;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: var(--primary);
+      z-index: 1;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .step-detail {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ── Build vs buy ── */
+    .bvb-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .bvb-row:last-child { border-bottom: none; }
+
+    .bvb-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      min-width: 200px;
+    }
+
+    .bvb-diy {
+      flex: 1;
+      font-size: 14px;
+      color: #9CA3AF;
+    }
+
+    .bvb-mto {
+      flex: 1;
+      font-size: 14px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    /* ── Certifications/badges ── */
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid var(--light-gray);
+      border-radius: 12px;
+      padding: 14px 22px;
+      background: white;
+    }
+
+    .cert-badge .cert-icon {
+      font-size: 28px;
+    }
+
+    .cert-badge .cert-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    /* ── Outcome badges ── */
+    .outcome-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .outcome-badge {
+      background: var(--primary-light);
+      border: 1.5px solid var(--primary-mid);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* ── Slide-specific: Title slide ── */
+    .title-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .title-sub {
+      font-size: 22px;
+      color: var(--gray);
+      font-weight: 400;
+      margin-top: 16px;
+      max-width: 600px;
+    }
+
+    /* ── Detail problem/solution blocks ── */
+    .ps-block {
+      background: white;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .ps-header {
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .ps-header.problem { background: #FEF2F2; color: #DC2626; }
+    .ps-header.solution { background: var(--primary-light); color: var(--primary); }
+
+    .ps-body {
+      padding: 16px 20px;
+      font-size: 15px;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── Quote block ── */
+    .quote-block {
+      border-left: 4px solid var(--primary);
+      padding: 16px 24px;
+      background: var(--primary-light);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .quote-block p {
+      font-size: 20px;
+      font-style: italic;
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    /* ── Key line / tagline ── */
+    .key-line {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.3;
+    }
+
+    /* ── spacer ── */
+    .sp { display: block; }
+    .sp-sm { height: 20px; }
+    .sp-md { height: 36px; }
+    .sp-lg { height: 52px; }
+    .sp-xl { height: 70px; }
+  </style>
+</head>
+<body>
+
+<!-- Fixed logo -->
+<div class="logo">
+  <img src="/stakater-logo.png" alt="Stakater" />
+</div>
+
+<!-- Slide counter -->
+<div class="slide-counter" id="slideCounter">1 / 13</div>
+
+<!-- Nav dots -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<div class="deck" id="deck">
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 0 — Title
+  ═══════════════════════════════════════════════ -->
+  <section class="active">
+    <div class="container">
+      <div class="title-eyebrow">Stakater Multi-Tenant Operator</div>
+      <h1>
+        From Kubernetes Clusters<br/>
+        to <span class="highlight">Enterprise Platform</span>
+      </h1>
+      <p class="title-sub">
+        Turning complexity into control, governance, and scale —<br/>
+        without building it yourself.
+      </p>
+      <span class="sp sp-xl"></span>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <span class="pill primary">Red Hat Certified Operator</span>
+        <span class="pill">OpenShift Native</span>
+        <span class="pill">AKS Compatible</span>
+        <span class="pill">Any Kubernetes Distribution</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 1 — The Multi-Cluster Trap
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container">
+      <h1>
+        The Strategy That<br/>
+        Seems Right — <span class="highlight">But Fails</span>
+      </h1>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="align-items:start;">
+        <div>
+          <div class="quote-block">
+            <p>"Let's give each team their own cluster.<br/>That ensures isolation and flexibility."</p>
+          </div>
+          <span class="sp sp-md"></span>
+          <p style="font-size:17px;">Sounds right on day one.<br/>By month six, the truth arrives.</p>
+          <span class="sp sp-md"></span>
+          <div class="cluster-chaos">
+            <div class="cluster-box">Team A<br/>cluster</div>
+            <div class="cluster-box">Team B<br/>cluster</div>
+            <div class="cluster-box">Team C<br/>cluster</div>
+            <div class="cluster-box stressed">Team D<br/>cluster</div>
+            <div class="cluster-box stressed">Team E<br/>cluster</div>
+            <div class="cluster-box stressed">Team F<br/>cluster</div>
+            <div class="cluster-box stressed" style="font-size:12px;">Team G<br/>cluster ⚠</div>
+            <div class="cluster-box stressed" style="font-size:11px; color:#991B1B;">Cluster N…<br/>⚠ ⚠</div>
+          </div>
+          <span class="sp sp-sm"></span>
+          <p style="font-size:14px; color:#DC2626; font-weight:600;">10 → 50 → 100 clusters. Each needs upgrades, policies, access control, monitoring.</p>
+        </div>
+        <div class="vdivider">
+          <h3 style="color:var(--gray); font-weight:600; margin-bottom:18px;">What actually happens</h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div class="card">
+              <div style="font-size:14px; font-weight:800; color:#DC2626; margin-bottom:4px;">NO STANDARDIZATION</div>
+              <div style="font-size:15px; color:var(--dark);">Every cluster is a snowflake. Policies drift. Security baselines diverge.</div>
+            </div>
+            <div class="card">
+              <div style="font-size:14px; font-weight:800; color:#DC2626; margin-bottom:4px;">COSTS EXPLODE</div>
+              <div style="font-size:15px; color:var(--dark);">Duplicated tooling, idle nodes, no chargeback. Finance can't explain the bill.</div>
+            </div>
+            <div class="card">
+              <div style="font-size:14px; font-weight:800; color:#DC2626; margin-bottom:4px;">PLATFORM TEAM BURNS OUT</div>
+              <div style="font-size:15px; color:var(--dark);">Every new team = manual cluster setup. The bottleneck becomes the platform team itself.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 2 — Where This Always Leads
+  ═══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <h1>
+        This Is Not a<br/>
+        Future Risk. <span class="highlight">This Always Happens.</span>
+      </h1>
+      <span class="sp sp-lg"></span>
+      <div class="col-3">
+        <div class="card" style="text-align:center; padding:32px 24px;">
+          <div class="stat">
+            <div class="number">6×</div>
+            <div class="label">more clusters than planned<br/>within 18 months</div>
+          </div>
+        </div>
+        <div class="card" style="text-align:center; padding:32px 24px;">
+          <div class="stat">
+            <div class="number">40%</div>
+            <div class="label">of platform team time spent<br/>on cluster maintenance</div>
+          </div>
+        </div>
+        <div class="card" style="text-align:center; padding:32px 24px;">
+          <div class="stat">
+            <div class="number">0</div>
+            <div class="label">teams with clear cost<br/>visibility per workload</div>
+          </div>
+        </div>
+      </div>
+      <span class="sp sp-lg"></span>
+      <div class="col-2" style="gap:30px; align-items:start;">
+        <div>
+          <h3 style="margin-bottom:12px;">Operational cost grows linearly</h3>
+          <p style="font-size:16px;">Add a team → add a cluster → add a full operations burden. There is no economy of scale with cluster sprawl.</p>
+        </div>
+        <div>
+          <h3 style="margin-bottom:12px;">Complexity grows exponentially</h3>
+          <p style="font-size:16px;">Security policies drift. Tooling duplicates. Audit trails fragment. The more clusters, the harder compliance becomes.</p>
+        </div>
+      </div>
+      <span class="sp sp-md"></span>
+      <div class="key-line" style="text-align:center; color:var(--primary);">
+        Clusters don't scale. Platforms do.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 3 — The Real Problem (Reframe)
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container">
+      <h1>
+        You're Solving<br/>
+        the <span class="highlight">Wrong Problem</span>
+      </h1>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="align-items:center; gap:60px;">
+        <div>
+          <p style="font-size:17px; margin-bottom:24px;">Most teams diagnose the symptom — too many clusters — and prescribe more cluster tooling. That doesn't solve it. It scales the pain.</p>
+          <div class="card" style="margin-bottom:16px;">
+            <div style="font-size:14px; font-weight:800; color:var(--gray); margin-bottom:6px; letter-spacing:1px;">YOU THINK</div>
+            <div style="font-size:18px; font-weight:700; color:var(--dark);">"We need better cluster management"</div>
+          </div>
+          <div class="card accented">
+            <div style="font-size:14px; font-weight:800; color:var(--primary); margin-bottom:6px; letter-spacing:1px;">THE REAL NEED</div>
+            <div style="font-size:18px; font-weight:700; color:var(--dark);">A platform layer <em>on top</em> of Kubernetes</div>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin-bottom:20px;">Three truths the industry has learned</h3>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <span style="font-size:22px; margin-top:2px;">🚫</span>
+              <div>
+                <div style="font-weight:800; color:var(--dark); margin-bottom:3px;">Namespace ≠ multi-tenancy</div>
+                <div style="font-size:14px; color:var(--gray);">A namespace is a label. Isolation requires policy, network, RBAC, and quotas enforced together.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <span style="font-size:22px; margin-top:2px;">🚫</span>
+              <div>
+                <div style="font-weight:800; color:var(--dark); margin-bottom:3px;">Kubernetes gives primitives, not a platform</div>
+                <div style="font-size:14px; color:var(--gray);">RBAC, NetworkPolicy, ResourceQuota — these are building blocks. You still have to assemble the platform.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+              <span style="font-size:22px; margin-top:2px;">🚫</span>
+              <div>
+                <div style="font-weight:800; color:var(--dark); margin-bottom:3px;">Self-service without guardrails is a compliance risk</div>
+                <div style="font-size:14px; color:var(--gray);">Freedom without policy enforcement is just controlled chaos with extra steps.</div>
+              </div>
+            </div>
+          </div>
+          <span class="sp sp-md"></span>
+          <div class="key-line">This is not a Kubernetes problem.<br/>It's a <span class="highlight">platform problem</span>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 4 — The Platform Model
+  ═══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <h1>
+        There Is a<br/>
+        <span class="highlight">Better Model</span>
+      </h1>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="align-items:center; gap:60px;">
+        <div>
+          <h3 style="color:var(--gray); font-weight:500; margin-bottom:20px;">Instead of many clusters…</h3>
+          <div class="cluster-chaos" style="margin-bottom:24px;">
+            <div class="cluster-box stressed">Cluster<br/>A</div>
+            <div class="cluster-box stressed">Cluster<br/>B</div>
+            <div class="cluster-box stressed">Cluster<br/>C</div>
+            <div class="cluster-box stressed">Cluster<br/>N…</div>
+          </div>
+          <div style="display:flex; justify-content:center; align-items:center; gap:12px; color:var(--primary); font-size:32px; margin:16px 0;">↓</div>
+          <h3 style="color:var(--dark); margin-bottom:14px;">Few clusters. Many secure tenants.</h3>
+          <div class="tenant-model">
+            <div class="tenant-cluster">
+              <div style="font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--primary); margin-bottom:4px;">Cluster (1–3)</div>
+              <div style="font-size:16px; font-weight:700; color:var(--dark);">Central governance · Policy enforcement</div>
+              <div class="tenant-row">
+                <div class="tenant-tag">Team A<br/><span style="font-size:11px; color:var(--gray);">isolated tenant</span></div>
+                <div class="tenant-tag">Team B<br/><span style="font-size:11px; color:var(--gray);">isolated tenant</span></div>
+                <div class="tenant-tag">Team C<br/><span style="font-size:11px; color:var(--gray);">isolated tenant</span></div>
+                <div class="tenant-tag">Team N<br/><span style="font-size:11px; color:var(--gray);">isolated tenant</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="vdivider">
+          <h3 style="margin-bottom:20px;">What the platform model delivers</h3>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:20px; margin-top:2px;">✓</span>
+              <div>
+                <div style="font-weight:700; color:var(--dark);">Isolation without cluster per team</div>
+                <div style="font-size:14px; color:var(--gray);">Policy-enforced boundaries — RBAC, network, quotas — per tenant, automatically.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:20px; margin-top:2px;">✓</span>
+              <div>
+                <div style="font-weight:700; color:var(--dark);">Self-service with guardrails</div>
+                <div style="font-size:14px; color:var(--gray);">Teams onboard themselves. Compliance is default behavior, not a checklist.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:20px; margin-top:2px;">✓</span>
+              <div>
+                <div style="font-weight:700; color:var(--dark);">Central governance, distributed execution</div>
+                <div style="font-size:14px; color:var(--gray);">One control plane. Every team works inside defined policy. No drift.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:20px; margin-top:2px;">✓</span>
+              <div>
+                <div style="font-weight:700; color:var(--dark);">Platform team scales without headcount</div>
+                <div style="font-size:14px; color:var(--gray);">Add a team in minutes, not days. Automation absorbs what used to require humans.</div>
+              </div>
+            </div>
+          </div>
+          <span class="sp sp-md"></span>
+          <div class="key-line">Clusters give isolation.<br/><span class="highlight">Platforms give control.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 5 — Introducing MTO
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container" style="text-align:center;">
+      <div class="title-eyebrow">Introducing</div>
+      <h1>MTO</h1>
+      <p style="font-size:22px; color:var(--gray); margin: 14px auto 0; max-width:100%;">
+        The Enterprise Platform Layer for Kubernetes
+      </p>
+      <span class="sp sp-xl"></span>
+      <div class="col-2" style="text-align:left; gap:50px; align-items:start;">
+        <div>
+          <h3 style="color:var(--gray); font-weight:500; margin-bottom:20px;">Kubernetes Provides</h3>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="font-size:17px; color:var(--gray);">Pods, deployments, services</div>
+            <div style="font-size:17px; color:var(--gray);">Namespaces (labels, not isolation)</div>
+            <div style="font-size:17px; color:var(--gray);">Raw RBAC primitives</div>
+            <div style="font-size:17px; color:var(--gray);">Resource API</div>
+            <div style="font-size:17px; color:var(--gray);">Infrastructure runtime</div>
+          </div>
+        </div>
+        <div class="vdivider">
+          <h3 style="margin-bottom:20px;">MTO Provides</h3>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="font-size:17px; color:var(--dark); font-weight:600;">True multi-tenant abstraction</div>
+            <div style="font-size:17px; color:var(--dark); font-weight:600;">Policy-enforced isolation</div>
+            <div style="font-size:17px; color:var(--dark); font-weight:600;">Self-service with built-in governance</div>
+            <div style="font-size:17px; color:var(--dark); font-weight:600;">Per-tenant cost visibility</div>
+            <div style="font-size:17px; color:var(--dark); font-weight:600;">Enterprise platform — not primitives</div>
+          </div>
+        </div>
+      </div>
+      <span class="sp sp-lg"></span>
+      <div class="quote-block" style="max-width:780px; margin:0 auto; text-align:left;">
+        <p>"Every enterprise eventually builds this layer. MTO gives it to you out of the box — without the 12 months of engineering debt."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 6 — The 6 Pillars
+  ═══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <h1>
+        Everything Required for an<br/>
+        <span class="highlight">Enterprise Platform</span>
+      </h1>
+      <span class="sp sp-md"></span>
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">🏢</div>
+          <div class="pillar-name">Tenancy</div>
+          <div class="pillar-tagline">True tenant abstraction — not just namespaces. Isolation across workloads, network, and storage. Enforced automatically.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">📋</div>
+          <div class="pillar-name">Templates</div>
+          <div class="pillar-tagline">Golden templates for apps and infra. Standardization without slowing teams down. Controlled self-service.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">💤</div>
+          <div class="pillar-name">Hibernation</div>
+          <div class="pillar-tagline">Auto sleep/wake for non-production workloads. Up to 60% cost savings. On-demand activation.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">💰</div>
+          <div class="pillar-name">FinOps</div>
+          <div class="pillar-tagline">Per-tenant cost visibility. Showback and chargeback. Budgets, alerts, rate plans. No more cost blindness.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🔌</div>
+          <div class="pillar-name">Extensions</div>
+          <div class="pillar-tagline">Plug-and-play ecosystem: ArgoCD, Vault/OpenBao, Keycloak, observability stack. One platform, unified experience.</div>
+        </div>
+        <div class="pillar-card featured">
+          <div class="pillar-badge">DIFFERENTIATOR</div>
+          <div class="pillar-icon">🛡️</div>
+          <div class="pillar-name">Compliance</div>
+          <div class="pillar-tagline">Policy-as-Code via Kyverno. Continuous enforcement — not point-in-time audits. Audit-ready by default. Governance without blocking developers.</div>
+        </div>
+      </div>
+      <span class="sp sp-md"></span>
+      <p style="text-align:center; font-size:16px; color:var(--gray);">Not features — <strong style="color:var(--dark);">capabilities required to operate Kubernetes at enterprise scale.</strong></p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 7 — Before vs After
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container">
+      <h1>
+        From Chaos<br/>
+        to <span class="highlight">Platform</span>
+      </h1>
+      <span class="sp sp-lg"></span>
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th class="before">❌ Without MTO</th>
+            <th class="after">✅ With MTO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="before">Cluster per team — sprawl inevitable</td>
+            <td class="after">Tenants in shared clusters — controlled scale</td>
+          </tr>
+          <tr>
+            <td class="before">Manual onboarding — days per team</td>
+            <td class="after">Automated tenant provisioning — minutes</td>
+          </tr>
+          <tr>
+            <td class="before">Inconsistent security — every cluster different</td>
+            <td class="after">Policy-driven enforcement — inherit everywhere</td>
+          </tr>
+          <tr>
+            <td class="before">No cost tracking — finance guessing</td>
+            <td class="after">Per-tenant visibility — showback from day one</td>
+          </tr>
+          <tr>
+            <td class="before">Platform team bottleneck — queue grows</td>
+            <td class="after">Self-service model — team scales without headcount</td>
+          </tr>
+          <tr>
+            <td class="before">Compliance is manual — audit pain every cycle</td>
+            <td class="after">Continuous enforcement — audit-ready by default</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 8 — Build vs Buy
+  ═══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <h1>
+        Why Not<br/>
+        <span class="highlight">Build It Ourselves?</span>
+      </h1>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="align-items:start; gap:50px;">
+        <div>
+          <p style="margin-bottom:20px;">Every team that goes down this road builds the same platform. Here's what that actually requires:</p>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <div class="bvb-row">
+              <div class="bvb-label">Multi-tenancy layer</div>
+              <div class="bvb-diy">3–4 months engineering</div>
+              <div class="bvb-mto">✓ Day one</div>
+            </div>
+            <div class="bvb-row">
+              <div class="bvb-label">Policy engine</div>
+              <div class="bvb-diy">2–3 months, ongoing tuning</div>
+              <div class="bvb-mto">✓ Day one</div>
+            </div>
+            <div class="bvb-row">
+              <div class="bvb-label">Cost tracking</div>
+              <div class="bvb-diy">3–6 months integration</div>
+              <div class="bvb-mto">✓ Day one</div>
+            </div>
+            <div class="bvb-row">
+              <div class="bvb-label">Templates system</div>
+              <div class="bvb-diy">2–3 months + drift maintenance</div>
+              <div class="bvb-mto">✓ Day one</div>
+            </div>
+            <div class="bvb-row">
+              <div class="bvb-label">Ecosystem integrations</div>
+              <div class="bvb-diy">Ongoing — every tool is custom</div>
+              <div class="bvb-mto">✓ Plug-and-play</div>
+            </div>
+            <div class="bvb-row">
+              <div class="bvb-label">Compliance framework</div>
+              <div class="bvb-diy">6–12 months, auditor-dependent</div>
+              <div class="bvb-mto">✓ Policy-as-Code, built in</div>
+            </div>
+          </div>
+          <span class="sp sp-sm"></span>
+          <div style="background:#FEF2F2; border-radius:10px; padding:14px 18px;">
+            <span style="font-weight:800; color:#DC2626;">Total DIY: </span>
+            <span style="color:var(--dark);">6–18 months of engineering. Then you own it forever. Key-person dependency. No roadmap. No support.</span>
+          </div>
+        </div>
+        <div class="vdivider">
+          <h3 style="margin-bottom:20px;">The hidden truth</h3>
+          <p style="margin-bottom:20px;">You're not choosing between "buy MTO" or "build nothing." You're choosing between MTO and 18 months of internal engineering that produces an incomplete, unmaintained version of MTO.</p>
+          <div class="card accented" style="margin-bottom:16px;">
+            <div style="font-size:15px; font-weight:700; color:var(--dark);">MTO is not a cost.</div>
+            <div style="font-size:14px; color:var(--gray); margin-top:4px;">It replaces internal engineering spend, accelerates delivery, and removes ongoing maintenance ownership.</div>
+          </div>
+          <div class="key-line">"You're not avoiding the work.<br/>You're choosing to <span class="highlight">own it forever</span>."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 9 — Business Value
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container">
+      <h1>
+        What This<br/>
+        <span class="highlight">Enables</span>
+      </h1>
+      <span class="sp sp-lg"></span>
+      <div class="col-2" style="align-items:start; gap:60px;">
+        <div>
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div style="min-width:48px; height:48px; background:var(--primary-light); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px;">⚡</div>
+              <div>
+                <div style="font-weight:800; font-size:17px; color:var(--dark); margin-bottom:4px;">Faster team onboarding</div>
+                <div style="font-size:14px; color:var(--gray);">From days to minutes. Teams provision their own environments inside compliance guardrails. No queue.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div style="min-width:48px; height:48px; background:var(--primary-light); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px;">📉</div>
+              <div>
+                <div style="font-weight:800; font-size:17px; color:var(--dark); margin-bottom:4px;">Reduced operational overhead</div>
+                <div style="font-size:14px; color:var(--gray);">Platform team stops firefighting. Policy enforcement is automatic. Hibernate non-prod for immediate cost reduction.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div style="min-width:48px; height:48px; background:var(--primary-light); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px;">🛡️</div>
+              <div>
+                <div style="font-weight:800; font-size:17px; color:var(--dark); margin-bottom:4px;">Built-in compliance</div>
+                <div style="font-size:14px; color:var(--gray);">ISO, DORA, SOC 2 — governance baked in from day one. Audits become a formality, not a project.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:18px; align-items:flex-start;">
+              <div style="min-width:48px; height:48px; background:var(--primary-light); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px;">📊</div>
+              <div>
+                <div style="font-weight:800; font-size:17px; color:var(--dark); margin-bottom:4px;">Predictable cost model</div>
+                <div style="font-size:14px; color:var(--gray);">Per-tenant visibility means accountability. Finance can justify platform investment. Budget overruns have a cause.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin-bottom:20px; color:var(--gray); font-weight:600;">Platform becomes an enabler, not a bottleneck</h3>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div class="card accented">
+              <div style="font-size:13px; font-weight:800; color:var(--primary); letter-spacing:1px; margin-bottom:6px;">FOR ENGINEERING LEADERSHIP</div>
+              <div style="font-size:15px; color:var(--dark);">Deliver more with the same platform team. Stop reinventing governance. Spend engineering cycles on product.</div>
+            </div>
+            <div class="card">
+              <div style="font-size:13px; font-weight:800; color:var(--gray); letter-spacing:1px; margin-bottom:6px;">FOR FINANCE & PROCUREMENT</div>
+              <div style="font-size:15px; color:var(--dark);">Replace hidden engineering spend with a known, supported product cost. ROI is immediate via Hibernation savings alone.</div>
+            </div>
+            <div class="card">
+              <div style="font-size:13px; font-weight:800; color:var(--gray); letter-spacing:1px; margin-bottom:6px;">FOR SECURITY & COMPLIANCE</div>
+              <div style="font-size:15px; color:var(--dark);">Policy enforcement is continuous, not periodic. Audit evidence is generated automatically. No manual evidence collection.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 10 — Adoption Path
+  ═══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <h1>
+        How You<br/>
+        <span class="highlight">Start</span>
+      </h1>
+      <span class="sp sp-sm"></span>
+      <p>No big-bang migration. No rearchitecting. Start where you are.</p>
+      <span class="sp sp-lg"></span>
+      <div class="steps">
+        <div class="step" style="background:var(--bg-light); border-radius:14px;">
+          <div class="step-num">1</div>
+          <div class="step-title">Pilot</div>
+          <div class="step-detail">
+            Single cluster.<br/>
+            2–3 teams as tenants.<br/>
+            MTO deployed alongside<br/>
+            existing workloads.<br/>
+            <br/>
+            <strong style="color:var(--primary);">Timeline: 1–2 weeks</strong>
+          </div>
+        </div>
+        <div class="step" style="background:var(--bg-light); border-radius:14px;">
+          <div class="step-num">2</div>
+          <div class="step-title">Expand</div>
+          <div class="step-detail">
+            Roll out templates<br/>
+            across all teams.<br/>
+            Enable Hibernation<br/>
+            on non-prod.<br/>
+            Activate FinOps.<br/>
+            <br/>
+            <strong style="color:var(--primary);">Timeline: 4–6 weeks</strong>
+          </div>
+        </div>
+        <div class="step" style="background:var(--bg-light); border-radius:14px;">
+          <div class="step-num">3</div>
+          <div class="step-title">Standardize</div>
+          <div class="step-detail">
+            Compliance pillar live.<br/>
+            Extensions integrated<br/>
+            (ArgoCD, Vault, etc.).<br/>
+            Chargeback model<br/>
+            operational.<br/>
+            <br/>
+            <strong style="color:var(--primary);">Timeline: 8–12 weeks</strong>
+          </div>
+        </div>
+        <div class="step" style="background:var(--primary-light); border-radius:14px; border:1.5px solid var(--primary-mid);">
+          <div class="step-num">4</div>
+          <div class="step-title">Scale</div>
+          <div class="step-detail">
+            Organization-wide<br/>
+            platform.<br/>
+            Multi-cluster if needed.<br/>
+            Platform team as<br/>
+            internal product team.<br/>
+            <br/>
+            <strong style="color:var(--primary);">Platform at scale</strong>
+          </div>
+        </div>
+      </div>
+      <span class="sp sp-lg"></span>
+      <div class="key-line" style="text-align:center;">
+        You don't need to transform everything.<br/>
+        You just need to <span class="highlight">start</span>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 11 — Why Stakater
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container">
+      <h1>
+        Why <span class="highlight">Stakater</span>
+      </h1>
+      <span class="sp sp-lg"></span>
+      <div class="col-2" style="align-items:start; gap:60px;">
+        <div>
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div class="cert-badge">
+              <span class="cert-icon">🏅</span>
+              <div>
+                <div class="cert-text">Red Hat Premier Partner</div>
+                <div style="font-size:13px; color:var(--gray);">Deepest OpenShift integration & support</div>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-icon">✅</span>
+              <div>
+                <div class="cert-text">Red Hat Certified Operator</div>
+                <div style="font-size:13px; color:var(--gray);">MTO is certified — enterprise-grade, supported lifecycle</div>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-icon">🧠</span>
+              <div>
+                <div class="cert-text">Kubernetes Multi-Tenancy Specialists</div>
+                <div style="font-size:13px; color:var(--gray);">This is what we do — not a side product</div>
+              </div>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-icon">🔧</span>
+              <div>
+                <div class="cert-text">Product + Consulting</div>
+                <div style="font-size:13px; color:var(--gray);">We deploy with you, not just ship a license</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="vdivider">
+          <h3 style="margin-bottom:18px;">What customers say</h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div class="quote-block" style="background:white; border-left-color:var(--primary);">
+              <p style="font-size:17px;">"We reduced team onboarding from weeks to hours."</p>
+            </div>
+            <div class="quote-block" style="background:white; border-left-color:var(--primary);">
+              <p style="font-size:17px;">"Our platform team stopped being a bottleneck overnight."</p>
+            </div>
+            <div class="quote-block" style="background:white; border-left-color:var(--primary);">
+              <p style="font-size:17px;">"We finally have cost visibility by team. Finance is satisfied."</p>
+            </div>
+            <div class="quote-block" style="background:white; border-left-color:var(--primary);">
+              <p style="font-size:17px;">"We stopped spinning up unnecessary clusters."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 12 — Closing CTA
+  ═══════════════════════════════════════════════ -->
+  <section class="cta">
+    <div class="container" style="text-align:center;">
+      <div style="font-size:13px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--primary); margin-bottom:20px;">The Decision</div>
+      <h1 style="font-size:58px;">
+        You will build this<br/>
+        platform layer <span class="highlight">eventually</span>.
+      </h1>
+      <span class="sp sp-lg"></span>
+      <div class="col-2" style="gap:40px; text-align:left; max-width:820px; margin:0 auto;">
+        <div style="border:1.5px solid rgba(255,255,255,0.15); border-radius:14px; padding:28px;">
+          <div style="font-size:14px; font-weight:800; letter-spacing:1px; color:#9CA3AF; margin-bottom:14px;">OPTION A</div>
+          <div style="font-size:20px; font-weight:700; color:white; margin-bottom:10px;">Build it yourself</div>
+          <div style="font-size:15px; color:#9CA3AF; line-height:1.7;">
+            6–18 months engineering<br/>
+            Ongoing maintenance forever<br/>
+            Key-person dependency<br/>
+            No roadmap, no support<br/>
+            Still incomplete at v1
+          </div>
+        </div>
+        <div style="border:2px solid var(--primary); border-radius:14px; padding:28px; background:rgba(234,120,69,0.1);">
+          <div style="font-size:14px; font-weight:800; letter-spacing:1px; color:var(--primary); margin-bottom:14px;">OPTION B</div>
+          <div style="font-size:20px; font-weight:700; color:white; margin-bottom:10px;">Start with MTO today</div>
+          <div style="font-size:15px; color:#D1D5DB; line-height:1.7;">
+            Production-ready in weeks<br/>
+            Proven patterns, continuous updates<br/>
+            Supported by experts<br/>
+            Red Hat certified<br/>
+            Immediate cost savings (Hibernation)
+          </div>
+        </div>
+      </div>
+      <span class="sp sp-xl"></span>
+      <h2 style="font-size:28px; color:white; font-weight:400;">
+        Let's talk about a <span class="highlight">pilot</span>.
+      </h2>
+      <span class="sp sp-sm"></span>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+        <span class="pill primary" style="font-size:16px; padding:10px 24px;">Workshop / Assessment</span>
+        <span class="pill" style="font-size:16px; padding:10px 24px; background:rgba(255,255,255,0.1); color:white; border-color:rgba(255,255,255,0.2);">Pilot Deployment</span>
+        <span class="pill" style="font-size:16px; padding:10px 24px; background:rgba(255,255,255,0.1); color:white; border-color:rgba(255,255,255,0.2);">Platform Maturity Roadmap</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('section'));
+  const counter = document.getElementById('slideCounter');
+  const dotsContainer = document.getElementById('navDots');
+  const total = slides.length;
+  let current = 0;
+
+  // Build nav dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    document.querySelectorAll('.nav-dot')[current].classList.remove('active');
+    current = Math.max(0, Math.min(total - 1, n));
+    slides[current].classList.add('active');
+    document.querySelectorAll('.nav-dot')[current].classList.add('active');
+    counter.textContent = `${current + 1} / ${total}`;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') goTo(current + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+    if (e.key === 'Home') goTo(0);
+    if (e.key === 'End') goTo(total - 1);
+  });
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+  });
+</script>
+</body>
+</html>

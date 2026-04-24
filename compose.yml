@@ -1,0 +1,8 @@
+services:
+  mto-pitch:
+    build:
+      context: .
+      dockerfile: Containerfile
+    ports:
+      - "8080:80"
+    restart: unless-stopped
