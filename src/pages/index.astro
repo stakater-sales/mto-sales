@@ -853,37 +853,89 @@
   ═══════════════════════════════════════════════ -->
   <section class="section-light">
     <div class="container" style="text-align:center;">
-      <div class="title-eyebrow">Introducing</div>
-      <h1>MTO</h1>
-      <p style="font-size:22px; color:var(--gray); margin: 14px auto 0; max-width:100%;">
-        The Enterprise Platform Layer for Kubernetes
+      <div class="title-eyebrow">The Missing Piece</div>
+      <h1>Introducing <span class="highlight">MTO</span></h1>
+      <p style="font-size:20px; color:var(--gray); margin:10px auto 0; max-width:640px;">
+        The enterprise platform layer between Kubernetes and your teams
       </p>
-      <span class="sp sp-xl"></span>
-      <div class="col-2" style="text-align:left; gap:50px; align-items:start;">
+      <span class="sp sp-md"></span>
+
+      <!-- Architecture stack diagram -->
+      <div style="max-width:680px; margin:0 auto; display:flex; flex-direction:column; gap:10px;">
+
+        <!-- Teams / Tenants row -->
         <div>
-          <h3 style="color:var(--gray); font-weight:500; margin-bottom:20px;">Kubernetes Provides</h3>
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <div style="font-size:17px; color:var(--gray);">Pods, deployments, services</div>
-            <div style="font-size:17px; color:var(--gray);">Namespaces (labels, not isolation)</div>
-            <div style="font-size:17px; color:var(--gray);">Raw RBAC primitives</div>
-            <div style="font-size:17px; color:var(--gray);">Resource API</div>
-            <div style="font-size:17px; color:var(--gray);">Infrastructure runtime</div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:8px; text-align:left;">Your Teams</div>
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+            <div style="background:white; border:1.5px solid var(--light-gray); border-radius:10px; padding:12px 8px; text-align:center;">
+              <div style="font-size:13px; font-weight:700; color:var(--dark);">Team A</div>
+              <div style="font-size:11px; color:var(--gray); margin-top:2px;">isolated tenant</div>
+            </div>
+            <div style="background:white; border:1.5px solid var(--light-gray); border-radius:10px; padding:12px 8px; text-align:center;">
+              <div style="font-size:13px; font-weight:700; color:var(--dark);">Team B</div>
+              <div style="font-size:11px; color:var(--gray); margin-top:2px;">isolated tenant</div>
+            </div>
+            <div style="background:white; border:1.5px solid var(--light-gray); border-radius:10px; padding:12px 8px; text-align:center;">
+              <div style="font-size:13px; font-weight:700; color:var(--dark);">Team C</div>
+              <div style="font-size:11px; color:var(--gray); margin-top:2px;">isolated tenant</div>
+            </div>
+            <div style="background:white; border:1.5px solid var(--light-gray); border-radius:10px; padding:12px 8px; text-align:center;">
+              <div style="font-size:13px; font-weight:700; color:var(--dark);">Team N+</div>
+              <div style="font-size:11px; color:var(--gray); margin-top:2px;">isolated tenant</div>
+            </div>
           </div>
         </div>
-        <div class="vdivider">
-          <h3 style="margin-bottom:20px;">MTO Provides</h3>
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <div style="font-size:17px; color:var(--dark); font-weight:600;">True multi-tenant abstraction</div>
-            <div style="font-size:17px; color:var(--dark); font-weight:600;">Policy-enforced isolation</div>
-            <div style="font-size:17px; color:var(--dark); font-weight:600;">Self-service with built-in governance</div>
-            <div style="font-size:17px; color:var(--dark); font-weight:600;">Per-tenant cost visibility</div>
-            <div style="font-size:17px; color:var(--dark); font-weight:600;">Enterprise platform — not primitives</div>
+
+        <!-- Connector -->
+        <div style="text-align:center; color:var(--primary); font-size:20px; opacity:0.35; line-height:1;">↕</div>
+
+        <!-- MTO Platform Layer -->
+        <div style="background:linear-gradient(135deg, var(--primary) 0%, #f0975f 100%); border-radius:16px; padding:22px 28px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <div style="text-align:left;">
+              <div style="font-size:11px; font-weight:800; letter-spacing:2.5px; color:rgba(255,255,255,0.65); text-transform:uppercase; margin-bottom:4px;">Platform Layer</div>
+              <div style="font-size:24px; font-weight:900; color:white; letter-spacing:-0.5px;">Multi-Tenant Operator</div>
+            </div>
+            <span style="background:rgba(255,255,255,0.2); color:white; border-radius:100px; padding:5px 14px; font-size:12px; font-weight:700; white-space:nowrap;">Red Hat Certified</span>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span style="background:rgba(255,255,255,0.2); color:white; border-radius:100px; padding:4px 14px; font-size:12px; font-weight:700;">Tenancy</span>
+            <span style="background:rgba(255,255,255,0.2); color:white; border-radius:100px; padding:4px 14px; font-size:12px; font-weight:700;">Templates</span>
+            <span style="background:rgba(255,255,255,0.2); color:white; border-radius:100px; padding:4px 14px; font-size:12px; font-weight:700;">Hibernation</span>
+            <span style="background:rgba(255,255,255,0.2); color:white; border-radius:100px; padding:4px 14px; font-size:12px; font-weight:700;">FinOps</span>
+            <span style="background:rgba(255,255,255,0.2); color:white; border-radius:100px; padding:4px 14px; font-size:12px; font-weight:700;">Extensions</span>
+            <span style="background:rgba(255,255,255,0.2); color:white; border-radius:100px; padding:4px 14px; font-size:12px; font-weight:700;">Compliance</span>
           </div>
         </div>
+
+        <!-- Connector -->
+        <div style="text-align:center; color:var(--primary); font-size:20px; opacity:0.35; line-height:1;">↕</div>
+
+        <!-- Kubernetes Distributions row -->
+        <div>
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+            <div style="background:white; border:1.5px solid var(--light-gray); border-radius:10px; padding:12px 8px; text-align:center;">
+              <div style="font-size:13px; font-weight:600; color:var(--gray);">AKS</div>
+            </div>
+            <div style="background:white; border:1.5px solid var(--light-gray); border-radius:10px; padding:12px 8px; text-align:center;">
+              <div style="font-size:13px; font-weight:600; color:var(--gray);">OpenShift</div>
+            </div>
+            <div style="background:white; border:1.5px solid var(--light-gray); border-radius:10px; padding:12px 8px; text-align:center;">
+              <div style="font-size:13px; font-weight:600; color:var(--gray);">EKS</div>
+            </div>
+            <div style="background:white; border:1.5px solid var(--light-gray); border-radius:10px; padding:12px 8px; text-align:center;">
+              <div style="font-size:13px; font-weight:600; color:var(--gray);">Any K8s</div>
+            </div>
+          </div>
+          <div style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-top:8px; text-align:left;">Kubernetes Infrastructure</div>
+        </div>
+
       </div>
+
       <span class="sp sp-lg"></span>
-      <div class="quote-block" style="max-width:780px; margin:0 auto; text-align:left;">
-        <p>"Every enterprise eventually builds this layer. MTO gives it to you out of the box — without the 12 months of engineering debt."</p>
+      <div class="key-line" style="text-align:center;">
+        The platform you end up building anyway —<br/>
+        <span class="highlight">out of the box</span>.
       </div>
     </div>
   </section>
