@@ -997,41 +997,76 @@
         From Chaos<br/>
         to <span class="highlight">Platform</span>
       </h1>
-      <span class="sp sp-lg"></span>
-      <table class="comparison">
-        <thead>
-          <tr>
-            <th class="before">❌ Without MTO</th>
-            <th class="after">✅ With MTO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="before">Cluster per team — sprawl inevitable</td>
-            <td class="after">Tenants in shared clusters — controlled scale</td>
-          </tr>
-          <tr>
-            <td class="before">Manual onboarding — days per team</td>
-            <td class="after">Automated tenant provisioning — minutes</td>
-          </tr>
-          <tr>
-            <td class="before">Inconsistent security — every cluster different</td>
-            <td class="after">Policy-driven enforcement — inherit everywhere</td>
-          </tr>
-          <tr>
-            <td class="before">No cost tracking — finance guessing</td>
-            <td class="after">Per-tenant visibility — showback from day one</td>
-          </tr>
-          <tr>
-            <td class="before">Platform team bottleneck — queue grows</td>
-            <td class="after">Self-service model — team scales without headcount</td>
-          </tr>
-          <tr>
-            <td class="before">Compliance is manual — audit pain every cycle</td>
-            <td class="after">Continuous enforcement — audit-ready by default</td>
-          </tr>
-        </tbody>
-      </table>
+      <span class="sp sp-md"></span>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+        <!-- WITHOUT MTO -->
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid #FECACA;">
+          <div style="background:#FEF2F2; padding:14px 24px; border-bottom:1.5px solid #FECACA;">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#DC2626;">Without MTO</span>
+          </div>
+          <div style="background:#FFFBFB;">
+            <div style="padding:14px 24px; border-bottom:1px solid #FEE2E2; display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Cluster per team</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Sprawl inevitable — complexity multiplies with every team</div></div>
+            </div>
+            <div style="padding:14px 24px; border-bottom:1px solid #FEE2E2; display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Manual onboarding</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Days per team — platform team is the bottleneck</div></div>
+            </div>
+            <div style="padding:14px 24px; border-bottom:1px solid #FEE2E2; display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Security drift</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Every cluster different — policies diverge over time</div></div>
+            </div>
+            <div style="padding:14px 24px; border-bottom:1px solid #FEE2E2; display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Cost blindness</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">No visibility per team — finance can't explain the bill</div></div>
+            </div>
+            <div style="padding:14px 24px; border-bottom:1px solid #FEE2E2; display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Platform team burns out</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Queue grows — scaling headcount is the only answer</div></div>
+            </div>
+            <div style="padding:14px 24px; display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Manual compliance</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Audit prep is a project — painful every cycle</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WITH MTO -->
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid var(--primary-mid);">
+          <div style="background:var(--primary-light); padding:14px 24px; border-bottom:1.5px solid var(--primary-mid);">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary);">With MTO</span>
+          </div>
+          <div style="background:white;">
+            <div style="padding:14px 24px; border-bottom:1px solid var(--light-gray); display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Tenants in shared clusters</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Controlled scale — add teams without adding clusters</div></div>
+            </div>
+            <div style="padding:14px 24px; border-bottom:1px solid var(--light-gray); display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Automated provisioning</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Minutes per tenant — teams self-serve inside guardrails</div></div>
+            </div>
+            <div style="padding:14px 24px; border-bottom:1px solid var(--light-gray); display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Policy-driven enforcement</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Security inherits everywhere — no drift, no exceptions</div></div>
+            </div>
+            <div style="padding:14px 24px; border-bottom:1px solid var(--light-gray); display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Per-tenant cost visibility</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Showback from day one — every team accountable</div></div>
+            </div>
+            <div style="padding:14px 24px; border-bottom:1px solid var(--light-gray); display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Self-service platform</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Platform team scales without headcount — queue disappears</div></div>
+            </div>
+            <div style="padding:14px 24px; display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div><div style="font-size:15px; font-weight:700; color:var(--dark);">Continuous enforcement</div><div style="font-size:13px; color:var(--gray); margin-top:2px;">Audit-ready by default — governance is automatic</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
