@@ -166,10 +166,7 @@ Walk the grid naturally. Don't read every word. Hit the highlights:
 >
 > Extensions: unified ecosystem. ArgoCD, Vault, Keycloak, observability — all wired in consistently, per tenant.
 
-Then slow down for the featured card:
-
-> And Compliance. This is where MTO becomes a strategic differentiator.
-> Policy-as-Code via Kyverno. Continuous enforcement — not a point-in-time audit.
+> And Compliance. Policy enforcement built into the platform. Continuous — not a point-in-time audit.
 > Governance without blocking developers.
 > Audit-ready by default.
 
