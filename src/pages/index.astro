@@ -590,7 +590,7 @@
 </div>
 
 <!-- Slide counter -->
-<div class="slide-counter" id="slideCounter">1 / 13</div>
+<div class="slide-counter" id="slideCounter">1 / 19</div>
 
 <!-- Nav dots -->
 <nav class="nav-dots" id="navDots"></nav>
@@ -977,7 +977,6 @@
           <div class="pillar-tagline">Plug-and-play ecosystem: ArgoCD, Vault/OpenBao, Keycloak, observability stack. One platform, unified experience.</div>
         </div>
         <div class="pillar-card featured">
-          <div class="pillar-badge">DIFFERENTIATOR</div>
           <div class="pillar-icon">🛡️</div>
           <div class="pillar-name">Compliance</div>
           <div class="pillar-tagline">Policy-as-Code via Kyverno. Continuous enforcement — not point-in-time audits. Audit-ready by default. Governance without blocking developers.</div>
@@ -989,7 +988,451 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════
-       SLIDE 7 — Before vs After
+       SLIDE 7 — Pillar 1: Tenancy
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container">
+      <div class="title-eyebrow">Pillar 1 of 6 &nbsp;·&nbsp; 🏢</div>
+      <h1 style="font-size:44px; margin-top:4px;"><span class="highlight">Tenancy</span></h1>
+      <p style="font-size:18px; margin-top:6px; color:var(--gray);">True tenant abstraction — not just namespaces</p>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="gap:20px; align-items:stretch;">
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid #FECACA;">
+          <div style="background:#FEF2F2; padding:13px 22px; border-bottom:1.5px solid #FECACA;">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#DC2626;">The Problem Today</span>
+          </div>
+          <div style="background:#FFFBFB; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">A namespace is not isolation</div>
+                <div style="font-size:13px; color:var(--gray);">It's a label. Without enforced boundaries, teams can accidentally reach each other's workloads — and you won't know until something breaks.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Manual setup for every team</div>
+                <div style="font-size:13px; color:var(--gray);">RBAC, quotas, network policies — configured by hand, every time. One missed setting is a compliance gap.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Auditors ask who has access to what</div>
+                <div style="font-size:13px; color:var(--gray);">Misconfigured RBAC causes incidents. When the question comes, you don't have a clean answer — just a lot of manual digging.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid var(--primary-mid);">
+          <div style="background:var(--primary-light); padding:13px 22px; border-bottom:1.5px solid var(--primary-mid);">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary);">With MTO</span>
+          </div>
+          <div style="background:white; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Tenant as a first-class resource</div>
+                <div style="font-size:13px; color:var(--gray);">Not just a namespace — a governed unit with its own identity, policies, and enforced boundaries from the moment it's created.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Isolation provisioned automatically</div>
+                <div style="font-size:13px; color:var(--gray);">RBAC, network policies, resource quotas — set up when a tenant is onboarded. No manual steps. No forgotten configs. No gaps.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Real boundaries — workloads, network, storage</div>
+                <div style="font-size:13px; color:var(--gray);">Enforced continuously, not just at setup. Teams can't see or affect each other. Security posture is consistent across every tenant.</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--dark); padding:14px 22px;">
+            <div style="font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:5px;">Outcome</div>
+            <div style="font-size:15px; font-weight:700; color:white;">Secure multi-tenancy at scale — enforce once, inherit everywhere.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 8 — Pillar 2: Templates
+  ═══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="title-eyebrow">Pillar 2 of 6 &nbsp;·&nbsp; 📋</div>
+      <h1 style="font-size:44px; margin-top:4px;"><span class="highlight">Templates</span></h1>
+      <p style="font-size:18px; margin-top:6px; color:var(--gray);">Standardization without slowing teams down</p>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="gap:20px; align-items:stretch;">
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid #FECACA;">
+          <div style="background:#FEF2F2; padding:13px 22px; border-bottom:1.5px solid #FECACA;">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#DC2626;">The Problem Today</span>
+          </div>
+          <div style="background:#FFFBFB; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Every team builds differently</div>
+                <div style="font-size:13px; color:var(--gray);">No standardization means no repeatable baseline. Security policies, ingress configs, monitoring — each team reinvents them their own way.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Onboarding a new team takes days</div>
+                <div style="font-size:13px; color:var(--gray);">Platform team creates namespaces, applies RBAC, configures ingress, sets up monitoring — manually, every single time.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Non-compliant configs reach production</div>
+                <div style="font-size:13px; color:var(--gray);">Without enforced templates, teams ship whatever works locally. The platform team reviews and fixes — endlessly.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid var(--primary-mid);">
+          <div style="background:var(--primary-light); padding:13px 22px; border-bottom:1.5px solid var(--primary-mid);">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary);">With MTO</span>
+          </div>
+          <div style="background:white; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Golden templates for namespaces, apps, infra</div>
+                <div style="font-size:13px; color:var(--gray);">Encode your platform's best practices once. Every team inherits them automatically — no negotiation, no exceptions.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Self-service with built-in guardrails</div>
+                <div style="font-size:13px; color:var(--gray);">Teams provision their own environments. Compliance is default behavior — not a gate they have to get through.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Version-controlled, centrally managed</div>
+                <div style="font-size:13px; color:var(--gray);">Templates evolve with your platform. Push an update once — all tenants inherit it. No drift, no one-off fixes.</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--dark); padding:14px 22px;">
+            <div style="font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:5px;">Outcome</div>
+            <div style="font-size:15px; font-weight:700; color:white;">Teams onboard in minutes. Environments are consistent. Platform team stops firefighting.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 9 — Pillar 3: Hibernation
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container">
+      <div class="title-eyebrow">Pillar 3 of 6 &nbsp;·&nbsp; 💤</div>
+      <h1 style="font-size:44px; margin-top:4px;"><span class="highlight">Hibernation</span></h1>
+      <p style="font-size:18px; margin-top:6px; color:var(--gray);">Stop paying for idle workloads</p>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="gap:20px; align-items:stretch;">
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid #FECACA;">
+          <div style="background:#FEF2F2; padding:13px 22px; border-bottom:1.5px solid #FECACA;">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#DC2626;">The Problem Today</span>
+          </div>
+          <div style="background:#FFFBFB; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Dev and staging run 24/7</div>
+                <div style="font-size:13px; color:var(--gray);">Nobody is using non-production environments at 2am, on weekends, or during holidays. But the compute bill doesn't know that.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">No automatic off switch</div>
+                <div style="font-size:13px; color:var(--gray);">Cloud costs grow without discipline. Every idle pod is waste — but nobody owns the problem or has the tools to fix it.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Finance can't explain the bill</div>
+                <div style="font-size:13px; color:var(--gray);">"Cloud costs went up" is not a root cause. Without visibility into idle spend, every budget conversation is guesswork.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid var(--primary-mid);">
+          <div style="background:var(--primary-light); padding:13px 22px; border-bottom:1.5px solid var(--primary-mid);">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary);">With MTO</span>
+          </div>
+          <div style="background:white; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Automatic sleep / wake scheduling</div>
+                <div style="font-size:13px; color:var(--gray);">Define business hours per tenant or namespace. Workloads spin down at night, back up in the morning — automatically.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">On-demand activation when teams need it</div>
+                <div style="font-size:13px; color:var(--gray);">Teams can wake their environment instantly when they need it outside of schedule. No waiting, no platform team involved.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Fine-grained control per environment</div>
+                <div style="font-size:13px; color:var(--gray);">Different schedules for dev, staging, and test. Each team's workload profile is different — MTO respects that.</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--dark); padding:14px 22px;">
+            <div style="font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:5px;">Outcome</div>
+            <div style="font-size:15px; font-weight:700; color:white;">Up to 60% savings on non-production. Immediate, measurable ROI from week one.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 10 — Pillar 4: FinOps
+  ═══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="title-eyebrow">Pillar 4 of 6 &nbsp;·&nbsp; 💰</div>
+      <h1 style="font-size:44px; margin-top:4px;"><span class="highlight">FinOps</span></h1>
+      <p style="font-size:18px; margin-top:6px; color:var(--gray);">From cost blindness to cost control</p>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="gap:20px; align-items:stretch;">
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid #FECACA;">
+          <div style="background:#FEF2F2; padding:13px 22px; border-bottom:1.5px solid #FECACA;">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#DC2626;">The Problem Today</span>
+          </div>
+          <div style="background:#FFFBFB; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">One bill. Zero accountability.</div>
+                <div style="font-size:13px; color:var(--gray);">The cluster invoice is a black box. You know the total. You don't know which team consumed what — or why it keeps growing.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">No per-team visibility</div>
+                <div style="font-size:13px; color:var(--gray);">Engineering managers can't hold teams accountable. Nobody knows if their services are efficient. Budget overruns have no identifiable cause.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Platform investment is hard to justify</div>
+                <div style="font-size:13px; color:var(--gray);">Finance sees a growing cloud line item. Engineering can't defend it. The ROI of the platform is invisible — until it isn't.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid var(--primary-mid);">
+          <div style="background:var(--primary-light); padding:13px 22px; border-bottom:1.5px solid var(--primary-mid);">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary);">With MTO</span>
+          </div>
+          <div style="background:white; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Per-tenant cost visibility out of the box</div>
+                <div style="font-size:13px; color:var(--gray);">Every tenant's consumption tracked automatically. No custom tooling. No manual aggregation. The data is just there.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Showback and chargeback models</div>
+                <div style="font-size:13px; color:var(--gray);">Report costs by team, project, or business unit. Integrate with FinOps tools and ERP systems. Finance finally has answers.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Budget limits, alerts, and rate plans</div>
+                <div style="font-size:13px; color:var(--gray);">Set spending thresholds per tenant. Get notified before overruns happen, not after. Cost accountability becomes the default.</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--dark); padding:14px 22px;">
+            <div style="font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:5px;">Outcome</div>
+            <div style="font-size:15px; font-weight:700; color:white;">Cost is transparent, controllable, and accountable. Platform spend becomes defensible.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 11 — Pillar 5: Extensions
+  ═══════════════════════════════════════════════ -->
+  <section class="section-light">
+    <div class="container">
+      <div class="title-eyebrow">Pillar 5 of 6 &nbsp;·&nbsp; 🔌</div>
+      <h1 style="font-size:44px; margin-top:4px;"><span class="highlight">Extensions</span></h1>
+      <p style="font-size:18px; margin-top:6px; color:var(--gray);">One platform. Unified ecosystem.</p>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="gap:20px; align-items:stretch;">
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid #FECACA;">
+          <div style="background:#FEF2F2; padding:13px 22px; border-bottom:1.5px solid #FECACA;">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#DC2626;">The Problem Today</span>
+          </div>
+          <div style="background:#FFFBFB; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Every team wires their toolchain differently</div>
+                <div style="font-size:13px; color:var(--gray);">ArgoCD, Vault, Grafana, Keycloak — each team has their own setup, their own versions, their own break points.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Inconsistent platform experience</div>
+                <div style="font-size:13px; color:var(--gray);">A new engineer joins. Which team's way of doing things is right? There is no answer — just tribal knowledge and onboarding pain.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Every integration is a support burden</div>
+                <div style="font-size:13px; color:var(--gray);">Non-standard setups break in non-standard ways. The platform team inherits every problem — and there's no shared fix.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid var(--primary-mid);">
+          <div style="background:var(--primary-light); padding:13px 22px; border-bottom:1.5px solid var(--primary-mid);">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary);">With MTO</span>
+          </div>
+          <div style="background:white; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Plug-and-play enterprise integrations</div>
+                <div style="font-size:13px; color:var(--gray);">ArgoCD, OpenBao/Vault, Keycloak, LGTM observability — standardized, tested, and provisioned per tenant on onboarding.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Full stack delivered on tenant creation</div>
+                <div style="font-size:13px; color:var(--gray);">A new tenant gets the complete platform — GitOps, secrets, identity, observability — not just raw Kubernetes primitives.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Extensible without rearchitecting</div>
+                <div style="font-size:13px; color:var(--gray);">Add new integrations as your platform evolves. The model is open — you're not locked into what ships out of the box.</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--dark); padding:14px 22px;">
+            <div style="font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:5px;">Outcome</div>
+            <div style="font-size:15px; font-weight:700; color:white;">Consistent platform experience. Teams get the full stack from day one — no wiring required.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 12 — Pillar 6: Compliance
+  ═══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="title-eyebrow">Pillar 6 of 6 &nbsp;·&nbsp; 🛡️</div>
+      <h1 style="font-size:44px; margin-top:4px;"><span class="highlight">Compliance</span></h1>
+      <p style="font-size:18px; margin-top:6px; color:var(--gray);">Built-in governance. Audit-ready by default.</p>
+      <span class="sp sp-md"></span>
+      <div class="col-2" style="gap:20px; align-items:stretch;">
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid #FECACA;">
+          <div style="background:#FEF2F2; padding:13px 22px; border-bottom:1.5px solid #FECACA;">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#DC2626;">The Problem Today</span>
+          </div>
+          <div style="background:#FFFBFB; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Policies exist in documents, not in enforcement</div>
+                <div style="font-size:13px; color:var(--gray);">Security baselines are written down. What actually runs in the cluster is a different story. The gap accumulates silently.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Audit prep is a project in itself</div>
+                <div style="font-size:13px; color:var(--gray);">Every audit cycle means weeks of evidence collection, gap analysis, and emergency patching. It's reactive, expensive, and stressful.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:#FCA5A5; font-size:15px; flex-shrink:0; line-height:1.5;">✕</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Policy drift is invisible until it isn't</div>
+                <div style="font-size:13px; color:var(--gray);">Configurations change over time. Policies become outdated. Nobody notices — until a security incident or a failed audit exposes the gap.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:16px; overflow:hidden; border:1.5px solid var(--primary-mid);">
+          <div style="background:var(--primary-light); padding:13px 22px; border-bottom:1.5px solid var(--primary-mid);">
+            <span style="font-size:12px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary);">With MTO</span>
+          </div>
+          <div style="background:white; padding:20px 22px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Policy-as-Code via Kyverno — always on</div>
+                <div style="font-size:13px; color:var(--gray);">Policies aren't suggestions — they're enforced at admission. Non-compliant configs are rejected before they reach the cluster.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Every tenant starts compliant</div>
+                <div style="font-size:13px; color:var(--gray);">Compliance boundaries are set at tenant creation — ISO, DORA, SOC 2 baselines applied by default. No remediation, no exceptions to track.</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="color:var(--primary); font-size:15px; flex-shrink:0; line-height:1.5;">✓</span>
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--dark); margin-bottom:3px;">Built-in audit trail — always current</div>
+                <div style="font-size:13px; color:var(--gray);">Who provisioned what, when, with which policies. Evidence is generated automatically — not collected manually three weeks before an audit.</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--dark); padding:14px 22px;">
+            <div style="font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--primary); margin-bottom:5px;">Outcome</div>
+            <div style="font-size:15px; font-weight:700; color:white;">Audit-ready by default. Compliance is automatic — not a project that runs every quarter.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SLIDE 13 — Before vs After
   ═══════════════════════════════════════════════ -->
   <section class="section-light">
     <div class="container">
